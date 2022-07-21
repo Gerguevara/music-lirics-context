@@ -1,12 +1,12 @@
-import { useState } from "react";
 import Letras from "./Components/Letras";
+import { LetrasProvider } from "./context/LetrasProvider";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <Letras></Letras>
+      <LetrasProvider>
+        <Letras/>
+      </LetrasProvider>
     </>
   );
 }

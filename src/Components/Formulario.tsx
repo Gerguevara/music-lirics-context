@@ -1,22 +1,26 @@
 import { ChangeEvent, FormEventHandler, useState } from "react";
+import useLetras from "../hooks/useLetras";
+import { Busqueda } from "../interfaces/contextInterface";
 
-interface Busqueda {
-  artista: string;
-  cancion: string;
-}
 const Formulario = () => {
-  
-  const [busqueda, setBusqueda] = useState<Busqueda>({ artista: "",   cancion: "",});
+  const { setAlerta, busquedaLetra} = useLetras();
+
+  const [busqueda, setBusqueda] = useState<Busqueda>({
+    artista: '',
+    cancion: '',
+  });
 
   const handleSubmit: FormEventHandler = (
     e: ChangeEvent<HTMLInputElement>
   ): void => {
     e.preventDefault();
+
     if (Object.values(busqueda).includes("")) {
-      alert("Please enter a song and an artist");
+      setAlerta("Coloca nombre de artista y canción");
       return;
     }
-    console.log(busqueda);
+
+    busquedaLetra(busqueda);
   };
 
   return (
